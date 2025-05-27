@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fila de Atividades</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="queue-section">
+            <h2>Livres</h2>
+            <ul id="livres-queue">
+                </ul>
+        </div>
+
+        <div class="queue-section">
+            <h2>Ocupados</h2>
+            <ul id="ocupados-queue">
+                </ul>
+        </div>
+        
+        <div class="actions">
+            <button id="job-btn">Job</button>
+            <button id="livre-btn">Livre</button>
+        </div>
+
+        <div class="controls">
+            <button id="editar-btn">Editar</button>
+            <button id="configuracoes-btn">Configurações</button>
+        </div>
+
+        
+    </div>
+    
+    <div id="config-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Configurações da Fila Livre</h2>
+            <ul id="config-livres-queue">
+                </ul>
+            <div class="config-actions">
+                <input type="text" id="add-nome-input" placeholder="Adicionar novo nome">
+                <button id="add-nome-btn">Adicionar</button>
+            </div>
+            <div class="modal-buttons">
+                <button id="atualizar-fila-btn">Atualizar Fila</button>
+                <button id="cancelar-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

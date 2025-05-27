@@ -1,0 +1,307 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha ao topo para extensões e botões */
+    margin: 0;
+    background-color: #f4f7f6; /* Cor de fundo suave */
+    padding: 20px; /* Espaçamento interno */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaçamento entre os blocos */
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.queue-section {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.queue-section h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2em;
+    border-bottom: 2px solid #007bff; /* Linha azul para o título */
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.queue-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.queue-section li {
+    background-color: #ffffff;
+    border: 1px solid #d1d1d1;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    color: #555;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos para os botões */
+.controls, .actions {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+    justify-content: center; /* Centraliza os botões */
+    flex-wrap: wrap; /* Permite que os botões quebrem para a linha de baixo em telas menores */
+}
+
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex: 1; /* Faz os botões ocuparem o espaço disponível */
+    min-width: 120px; /* Largura mínima para os botões */
+}
+
+#editar-btn, #configuracoes-btn {
+    background-color: #6c757d; /* Cinza para botões de controle */
+    color: white;
+}
+
+#editar-btn:hover, #configuracoes-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+#job-btn {
+    background-color: #007bff; /* Azul para o botão "Job" */
+    color: white;
+}
+
+#job-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+#livre-btn {
+    background-color: #28a745; /* Verde para o botão "Livre" */
+    color: white;
+}
+
+#livre-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Estilos para responsividade (opcional, mas boa prática para extensões) */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+}
+
+
+.queue-section ul li {
+    /* ... outros estilos ... */
+    cursor: pointer; /* Adiciona um cursor de "mãozinha" ao passar o mouse */
+}
+
+.queue-section ul li.selecionado {
+    background-color: #cce5ff; /* Cor de destaque */
+    border-color: #b8daff;
+    color: #004085;
+    font-weight: bold;
+}
+
+button#editar-btn.ativo {
+    background-color: red; /* Verde mais vibrante para indicar ativo */
+    color: white;
+    box-shadow: 0 2px 5px red;
+}
+
+.queue-section#livres-queue.editavel li {
+    cursor: grab; /* Altera o cursor para indicar que pode ser arrastado */
+}
+
+/* Estilos para o Modal */
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed; /* Fixo na tela */
+    z-index: 1; /* Sobrepõe outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilita scroll se o conteúdo for grande */
+    background-color: rgba(0,0,0,0.4); /* Fundo semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centraliza verticalmente e adiciona margem */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largura do modal */
+    border-radius: 8px;
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+#config-livres-queue {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+#config-livres-queue li {
+    background-color: #ffffff;
+    border: 1px solid #d1d1d1;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: grid;
+    justify-content:stretch;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    font-size: 0.95em;
+    color: #555;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+#config-livres-queue li span {
+    text-align: right;
+}
+
+#config-livres-queue li .delete-icon {
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-left: 10px;
+}
+
+#config-livres-queue li .delete-icon:hover {
+    color: #c82333;
+}
+
+/* Estilos para as setas de reordenação no modal */
+#config-livres-queue li .arrow-icon {
+    color: #007bff;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-left: 5px;
+}
+
+#config-livres-queue li .arrow-icon:hover {
+    color: #0056b3;
+}
+
+.config-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+
+.config-actions input[type="text"] {
+    flex-grow: 1;
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.config-actions button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.config-actions button:hover {
+    background-color: #0056b3;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#atualizar-fila-btn {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+#atualizar-fila-btn:hover {
+    background-color: #218838;
+}
+
+#cancelar-btn {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+}
+
+#cancelar-btn:hover {
+    background-color: #c82333;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto semi-transparente */
+    z-index: 0; /* Abaixo do modal */
+}

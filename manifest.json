@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Fila de Atendimento",
+  "version": "1.0",
+  "description": "Gerencia a fila de atendimento com seleção e reordenação.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://100.26.4.178:3000/*"
+  ],
+  "action": {
+    "default_popup": "index.html"
+   
+  }
+}
