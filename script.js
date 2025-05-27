@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let configLivres = []; // Será populado pela API ao abrir o modal
 
     function buscarFilas() {
-        fetch('http://100.26.4.178:3000/livres')
+        fetch('http://100.26.4.178:3306/livres')
             .then(response => response.json())
             .then(data => {
                 livres = data.map(item => item.nome);
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => console.error('Erro ao buscar a lista de livres:', error));
 
-        fetch('http://100.26.4.178:3000/ocupados')
+        fetch('http://100.26.4.178:3306/ocupados')
             .then(response => response.json())
             .then(data => {
                 ocupados = data.map(item => item.nome);
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function confirmarExclusao(nomeParaExcluir) {
         if (confirm(`Tem certeza que deseja excluir "${nomeParaExcluir}"?`)) {
             // Aqui você precisará chamar a API para remover o nome do banco de dados
-            fetch(`http://100.26.4.178:3000/livres/${nomeParaExcluir}`, { method: 'DELETE' })
+            fetch(`http://100.26.4.178:3306/livres/${nomeParaExcluir}`, { method: 'DELETE' })
                 .then(response => {
                     if (response.ok) {
                         configLivres = configLivres.filter(nome => nome !== nomeParaExcluir);
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modoEdicaoAtivo) {
             // Salvar a nova ordem da fila de livres
             const novaOrdem = Array.from(livresQueue.children).map(li => li.textContent);
-            fetch('http://100.26.4.178:3000/livres/ordem', {
+            fetch('http://100.26.4.178:3306/livres/ordem', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Modal de Configurações
     configuracoesBtn.addEventListener('click', () => {
-        fetch('http://100.26.4.178:3000/livres')
+        fetch('http://100.26.4.178:3306/livres')
             .then(response => response.json())
             .then(data => {
                 configLivres = data.map(item => item.nome);
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addNomeBtn.addEventListener('click', () => {
         const novoNome = addNomeInput.value.trim();
         if (novoNome) {
-            fetch('http://100.26.4.178:3000/livres', {
+            fetch('http://100.26.4.178:3306/livres', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarFilaBtn.addEventListener('click', () => {
         if (confirm('Tem certeza que deseja atualizar a Fila Livre com as configurações atuais?')) {
             // Enviar a nova ordem para a API
-            fetch('http://100.26.4.178:3000/livres/ordem/config', {
+            fetch('http://100.26.4.178:3306/livres/ordem/config', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         if (nomeSelecionado && listaSelecionada === 'livres') {
-            fetch('http://100.26.4.178:3000/mover/livre-ocupado', {
+            fetch('http://100.26.4.178:3306/mover/livre-ocupado', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         if (nomeSelecionado && listaSelecionada === 'ocupados') {
-            fetch('http://100.26.4.178:3000/mover/ocupado-livre', {
+            fetch('http://100.26.4.178:3306/mover/ocupado-livre', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
